@@ -1,0 +1,14 @@
+{
+  "casuser": {
+    "oldName":["Jasig"],
+    "newName":["Apereo"]
+  },
+  "tensada": {
+    "oldName":["Tens"],
+    "newName":["Ada"]
+  },
+  "friabili": {
+    "oldName":["Fri"],
+    "newName":["Abili"]
+  }
+}
