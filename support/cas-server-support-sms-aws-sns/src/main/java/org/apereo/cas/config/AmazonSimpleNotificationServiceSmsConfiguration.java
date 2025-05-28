@@ -1,7 +1,7 @@
 package org.apereo.cas.config;
 
-import org.apereo.cas.aws.AmazonClientConfigurationBuilder;
-import org.apereo.cas.aws.ChainingAWSCredentialsProvider;
+//import org.apereo.cas.aws.AmazonClientConfigurationBuilder;
+//import org.apereo.cas.aws.ChainingAWSCredentialsProvider;
 import org.apereo.cas.configuration.CasConfigurationProperties;
 import org.apereo.cas.notifications.sms.SmsSender;
 import org.apereo.cas.support.sms.AmazonSimpleNotificationServiceSmsSender;
@@ -20,17 +20,17 @@ import software.amazon.awssdk.services.sns.SnsClient;
  * @author Misagh Moayyed
  * @since 5.3.0
  */
-@Configuration(value = "AmazonSimpleNotificationServiceSmsConfiguration", proxyBeanMethods = false)
-@EnableConfigurationProperties(CasConfigurationProperties.class)
+//@Configuration(value = "AmazonSimpleNotificationServiceSmsConfiguration", proxyBeanMethods = false)
+//@EnableConfigurationProperties(CasConfigurationProperties.class)
 public class AmazonSimpleNotificationServiceSmsConfiguration {
 
-    @RefreshScope(proxyMode = ScopedProxyMode.DEFAULT)
-    @Bean
-    public SmsSender smsSender(final CasConfigurationProperties casProperties) {
-        val sns = casProperties.getSmsProvider().getSns();
-        val clientBuilder = SnsClient.builder();
-        AmazonClientConfigurationBuilder.prepareClientBuilder(clientBuilder,
-            ChainingAWSCredentialsProvider.getInstance(sns.getCredentialAccessKey(), sns.getCredentialSecretKey(), sns.getProfilePath(), sns.getProfileName()), sns);
-        return new AmazonSimpleNotificationServiceSmsSender(clientBuilder.build(), sns);
-    }
+//    @RefreshScope(proxyMode = ScopedProxyMode.DEFAULT)
+//    @Bean
+//    public SmsSender smsSender(final CasConfigurationProperties casProperties) {
+//        val sns = casProperties.getSmsProvider().getSns();
+//        val clientBuilder = SnsClient.builder();
+//        AmazonClientConfigurationBuilder.prepareClientBuilder(clientBuilder,
+//            ChainingAWSCredentialsProvider.getInstance(sns.getCredentialAccessKey(), sns.getCredentialSecretKey(), sns.getProfilePath(), sns.getProfileName()), sns);
+//        return new AmazonSimpleNotificationServiceSmsSender(clientBuilder.build(), sns);
+//    }
 }

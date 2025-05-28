@@ -1,7 +1,7 @@
 package org.apereo.cas.config;
 
-import org.apereo.cas.aws.AmazonClientConfigurationBuilder;
-import org.apereo.cas.aws.ChainingAWSCredentialsProvider;
+//import org.apereo.cas.aws.AmazonClientConfigurationBuilder;
+//import org.apereo.cas.aws.ChainingAWSCredentialsProvider;
 import org.apereo.cas.configuration.CasConfigurationProperties;
 
 import lombok.val;
@@ -19,18 +19,18 @@ import software.amazon.awssdk.services.s3.S3Client;
  * @author Misagh Moayyed
  * @since 6.0.0
  */
-@Configuration(value = "AmazonS3SamlMetadataConfiguration", proxyBeanMethods = false)
-@EnableConfigurationProperties(CasConfigurationProperties.class)
+//@Configuration(value = "AmazonS3SamlMetadataConfiguration", proxyBeanMethods = false)
+//@EnableConfigurationProperties(CasConfigurationProperties.class)
 public class AmazonS3SamlMetadataConfiguration {
-
-    @ConditionalOnMissingBean(name = "amazonS3Client")
-    @Bean
-    @RefreshScope(proxyMode = ScopedProxyMode.DEFAULT)
-    public S3Client amazonS3Client(final CasConfigurationProperties casProperties) {
-        val amz = casProperties.getAuthn().getSamlIdp().getMetadata().getAmazonS3();
-        val credentials = ChainingAWSCredentialsProvider.getInstance(amz.getCredentialAccessKey(), amz.getCredentialSecretKey(), amz.getProfilePath(), amz.getProfileName());
-        val builder = S3Client.builder();
-        AmazonClientConfigurationBuilder.prepareClientBuilder(builder, credentials, amz);
-        return builder.build();
-    }
+//
+//    @ConditionalOnMissingBean(name = "amazonS3Client")
+//    @Bean
+//    @RefreshScope(proxyMode = ScopedProxyMode.DEFAULT)
+//    public S3Client amazonS3Client(final CasConfigurationProperties casProperties) {
+//        val amz = casProperties.getAuthn().getSamlIdp().getMetadata().getAmazonS3();
+//        val credentials = ChainingAWSCredentialsProvider.getInstance(amz.getCredentialAccessKey(), amz.getCredentialSecretKey(), amz.getProfilePath(), amz.getProfileName());
+//        val builder = S3Client.builder();
+//        AmazonClientConfigurationBuilder.prepareClientBuilder(builder, credentials, amz);
+//        return builder.build();
+//    }
 }
