@@ -1,0 +1,25 @@
+name: Crear rama temporal desde main
+
+on:
+    workflow_dispatch: 
+        inputs:
+            nueva_rama:
+                description: 'Nombre de la nueva rama'
+                required: true
+                default: 'temporal-upgrade'
+jobs:
+    crear-rama:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Clonar repositorio
+              uses: actions/checkout@4
+              with:
+                  fetch-depth: 0
+
+            - name: Crear y subir nueva rama
+              run: | 
+                git config user.name "github-action[bot]"
+                git config user.email "github-actions[bot]@users.noreply.github.com"
+                git checkout -b ${{ github.event.inputs.nueva_rama}}
+                git push origin ${{ github.event.inputs.nueva_rama}}
