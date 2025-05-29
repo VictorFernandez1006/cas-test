@@ -2,7 +2,6 @@ description = "Apereo CAS WS-Security Secure Token Service"
 dependencies {
     implementation libraries.opensaml
     implementation libraries.dropwizard
-    implementation libraries.apachecxf
     implementation libraries.bouncycastle
     implementation libraries.wss4j
 

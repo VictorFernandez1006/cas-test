@@ -3,7 +3,6 @@ dependencies {
     implementation libraries.opensaml
     implementation libraries.dropwizard
     implementation libraries.bouncycastle
-    implementation libraries.apachecxf
     implementation libraries.apachefediz
     implementation libraries.wss4j
     

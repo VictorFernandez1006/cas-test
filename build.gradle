@@ -2,7 +2,6 @@ import java.util.concurrent.ConcurrentHashMap
 
 description = "Apereo Central Authentication Service $version"
 defaultTasks "clean", "build"
-
 buildscript {
     repositories {
         mavenCentral()
@@ -10,12 +9,6 @@ buildscript {
         maven {
             url "https://maven.eveoh.nl/content/repositories/releases"
         }
-        /*
-        maven {
-            url "https://repo.spring.io/milestone"
-            mavenContent { releasesOnly() }
-        }
-         */
     }
 
     dependencies {
@@ -33,7 +26,13 @@ buildscript {
         classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:$gradleSonarqubeVersion"
         classpath "com.github.jengelman.gradle.plugins:shadow:$gradleShadowVersion"
         classpath "io.github.gradle-nexus:publish-plugin:$gradleNexusPublishingVersion"
+        classpath("org.openrewrite:plugin:7.7.0")
     }
+}
+apply plugin: "org.openrewrite.rewrite"
+
+rewrite {
+    activeRecipe("org.openrewrite.java.migrate.UpgradeToJava17")
 }
 
 ext {
