@@ -20,7 +20,7 @@ jobs:
 
       - name: Create timestamped branch from main
         run: |
-          TIMESTAMP=$(date + '%Y%m%d-%H%M%S')
+          TIMESTAMP=$(date +%Y%m%d-%H%M%S)
           BRANCH_NAME="cas-test-temp-${TIMESTAMP}"
           git checkout -b "$BRANCH_NAME"
           echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
