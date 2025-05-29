@@ -1,0 +1,55 @@
+name: Migrate Java Version (OpenRewrite)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  migrate-java:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0 #Necesario para crear ramas
+      - name: Setup Git config
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Create timestamped branch from main
+        run: |
+          TIMESTAMP=$(date + '%Y%m%d-%H%M%S')
+          BRANCH_NAME="cas-test-temp-${TIMESTAMP}"
+          git checkout -b "$BRANCH_NAME"
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+
+      - name: Show Java version before migration
+        run: |
+          echo "Java version before:"
+          grep -R 'targetCompatibility' . || echo "No version found"
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Run OpenRewrite Java 17 migration
+        run: ./gradlew rewriteRun --stacktrace
+
+      - name: Show Java version after migration
+        run: |
+          echo "Java version after:"
+          grep -R 'targetCompatibility' . || echo "No version found"
+
+      - name: Commit and Push if changes
+        run: |
+          if [ -n "$git status --porcelain"]; then
+            git add .
+            git commit -m "refactor: apply OpenRewrite Java 17 migration"
+            git push origin "$BRANCH_NAME"
+          else
+            echo "No changes to commit"
+          fi
