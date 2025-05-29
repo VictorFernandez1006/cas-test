@@ -35,6 +35,8 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
+      - name: Give execute permission to Gradle wrapper
+        run: chmod +x ./gradlew
 
       - name: Run OpenRewrite Java 17 migration
         run: ./gradlew rewriteRun --stacktrace
